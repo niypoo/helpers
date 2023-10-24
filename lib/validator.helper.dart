@@ -8,12 +8,13 @@ class ValidationHelper {
     int? smallerThan,
     bool isEmail = false,
     bool isUrl = false,
+    bool sometimes = false,
   }) {
     if (value == null) {
       return "Field Required".trParams({'_ield': inputName.tr});
     }
 
-    if (value.trim().isEmpty) {
+    if (!sometimes && value.trim().isEmpty ) {
       return "Field Required".trParams({'_ield': inputName.tr});
     }
     if (value.trim().length < biggerThan!) {
