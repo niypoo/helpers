@@ -2,28 +2,20 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
 class ColorHelper {
+  // candidate color
+  final Color color;
+
+  // construction
+  ColorHelper(this.color);
+
   //convert color hash code to dart color object
-  static Color? fromHash(String? hashCode) {
-    if (hashCode == null) return null;
-    return Color(int.parse('0xff$hashCode'));
-  }
+  String toHash() => color.value.toRadixString(16);
 
   //get if color is dark or light
-  static bool isColorLight(Color? color) {
-    return color == null
-        ? false
-        : color.computeLuminance() > 0.5
-            ? false
-            : true;
-  }
-
-  ///Method to get a random color
-  static randomColor() =>
-      Color((math.Random().nextDouble() * 0xFFFFFF).toInt() << 0)
-          .withOpacity(1.0);
+  bool isColorLight() => color.computeLuminance() > 0.5 ? false : true;
 
   // get darken color from candidate color
-  static Color darken(Color color, [double amount = .1]) {
+  Color darken([double amount = .1]) {
     assert(amount >= 0 && amount <= 1);
 
     final hsl = HSLColor.fromColor(color);
@@ -33,7 +25,7 @@ class ColorHelper {
   }
 
   // get light color from candidate color
-  static Color lighten(Color color, [double amount = .1]) {
+  Color lighten([double amount = .1]) {
     assert(amount >= 0 && amount <= 1);
 
     final hsl = HSLColor.fromColor(color);
@@ -42,4 +34,12 @@ class ColorHelper {
 
     return hslLight.toColor();
   }
+
+  //convert color hash code to dart color object
+  static Color fromHash(String hashCode) => Color(int.parse('0xff$hashCode'));
+
+  ///Method to get a random color
+  static randomColor() =>
+      Color((math.Random().nextDouble() * 0xFFFFFF).toInt() << 0)
+          .withOpacity(1.0);
 }
