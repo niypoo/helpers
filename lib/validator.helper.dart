@@ -10,21 +10,24 @@ class ValidationHelper {
     bool isUrl = false,
     bool sometimes = false,
   }) {
-
     if (value == null) {
       return "Field Required".trParams({'_ield': inputName.tr});
     }
 
-    if (!sometimes && value.trim().isEmpty ) {
+    if (!sometimes && value.trim().isEmpty) {
       return "Field Required".trParams({'_ield': inputName.tr});
     }
 
-    if (value.trim().isNotEmpty && value.trim().length < biggerThan!) {
+    if (value.trim().isNotEmpty &&
+        biggerThan != null &&
+        (value.trim().length < biggerThan)) {
       return "Bigger Than"
           .trParams({'_ount': biggerThan.toString(), '_ield': inputName.tr});
     }
 
-    if (value.trim().isNotEmpty && value.trim().length >= smallerThan!) {
+    if (value.trim().isNotEmpty &&
+        smallerThan != null &&
+        (value.trim().length >= smallerThan)) {
       return "Smaller Than"
           .trParams({'_ount': smallerThan.toString(), '_ield': inputName.tr});
     }
